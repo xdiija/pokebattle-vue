@@ -1,0 +1,3 @@
+There will 3 sections, one in the left for pokemon 1, one in the right for pokemon 2, and one in the middle for the battle result, 
+
+The btnBattle should be disable till the two pokemons are choosen, on the pokemons section, the btnGetPokemon should be disable till at least 3 character are typen on the input
