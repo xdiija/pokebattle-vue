@@ -190,7 +190,6 @@ function getErrorMessage(error: unknown, requestedName: string) {
 <template>
   <main class="battle-page">
     <header class="page-header">
-      <span class="league-badge">PokéAPI Arena</span>
       <h1>Pokemon Battle</h1>
     </header>
 
@@ -206,7 +205,6 @@ function getErrorMessage(error: unknown, requestedName: string) {
     <section class="battle-layout" aria-label="Pokemon battle simulator">
       <article class="pokemon-panel">
         <div class="panel-header">
-          <span class="trainer-label">Treinador 1</span>
           <strong>Pokemon 1</strong>
         </div>
 
@@ -290,7 +288,6 @@ function getErrorMessage(error: unknown, requestedName: string) {
 
       <article class="pokemon-panel">
         <div class="panel-header">
-          <span class="trainer-label">Treinador 2</span>
           <strong>Pokemon 2</strong>
         </div>
 
