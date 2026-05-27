@@ -1,42 +1,97 @@
-# vueFundamentos
+# Poke Battle Frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+Interface em Vue para buscar Pokemons, escolher dois competidores e exibir o resultado de uma batalha calculada pela API Laravel.
 
-## Recommended IDE Setup
+O frontend nao consulta mais a PokeAPI diretamente. Ele usa o backend do projeto para carregar o cache de Pokemons, buscar opcoes por nome e executar a batalha.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Tecnologias
 
-## Recommended Browser Setup
+- Vue 3: interface reativa com Composition API.
+- TypeScript: tipagem dos dados vindos da API.
+- Vite: servidor de desenvolvimento e build.
+- Laravel API: fonte dos dados usados na busca e na batalha.
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+## Como rodar
 
-## Type Support for `.vue` Imports in TS
+Acesse a pasta do frontend:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+```sh
+cd front
+```
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+Instale as dependencias:
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+Suba o servidor de desenvolvimento:
 
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+Por padrao, a aplicacao fica disponivel em:
+
+```txt
+http://localhost:5173
+```
+
+## Configuracao da API
+
+Por padrao, o frontend espera que a API Laravel esteja em:
+
+```txt
+http://localhost:8989/api
+```
+
+Para usar outra URL, crie um arquivo `.env` na pasta `front`:
+
+```env
+VITE_API_BASE_URL=http://localhost:8989/api
+```
+
+Se o Vite iniciar em uma porta diferente, atualize tambem o `FRONTEND_URLS` no `.env` do backend para evitar bloqueio de CORS.
+
+## Fluxo da aplicacao
+
+- Ao carregar a tela, o frontend chama `GET /api/pokemons/cache`.
+- Enquanto o cache nao termina com sucesso, os campos de busca ficam desabilitados.
+- Ao clicar em "Buscar Pokemon", o frontend chama `GET /api/pokemons/{name}`.
+- A resposta pode trazer nenhum, um ou varios Pokemons.
+- Os resultados sao exibidos em ordem alfabetica, com nome e imagem.
+- O usuario escolhe um Pokemon da lista para cada treinador.
+- Ao clicar em "Batalhar", o frontend chama `POST /api/pokemons/battle`.
+- O resultado da batalha e exibido em PT-BR.
+
+## Scripts
+
+Rodar em desenvolvimento:
+
+```sh
+npm run dev
+```
+
+Checar tipos:
+
+```sh
+npm run type-check
+```
+
+Gerar build de producao:
 
 ```sh
 npm run build
 ```
+
+Visualizar o build:
+
+```sh
+npm run preview
+```
+
+## Decisoes tecnicas
+
+- `src/services/pokeApi.ts` concentra as chamadas para a API Laravel.
+- `App.vue` controla o estado da tela, selecao de Pokemons e exibicao do resultado.
+- A mensagem de batalha retornada pelo backend e adaptada no frontend para PT-BR.

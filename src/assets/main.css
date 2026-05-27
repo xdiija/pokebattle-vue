@@ -97,6 +97,46 @@ h1 {
   margin: 0 auto;
 }
 
+.cache-status {
+  display: grid;
+  position: relative;
+  z-index: 1;
+  gap: 8px;
+  justify-items: center;
+  width: min(620px, 100%);
+  margin: -8px auto 24px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  color: var(--ink);
+  background: rgb(255 255 255 / 82%);
+  text-align: center;
+  box-shadow:
+    inset 0 0 0 1px rgb(24 34 48 / 8%),
+    0 14px 34px rgb(16 24 40 / 10%);
+}
+
+.cache-status strong {
+  color: var(--blue-dark);
+  font-size: 0.98rem;
+}
+
+.cache-status span {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.cache-retry-button {
+  min-height: 38px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 14px;
+  color: #ffffff;
+  background: var(--blue);
+  font-weight: 900;
+  cursor: pointer;
+}
+
 .pokemon-panel,
 .battle-panel {
   position: relative;
@@ -179,6 +219,7 @@ h1 {
 .pokemon-input,
 .action-button,
 .battle-button,
+.pokemon-option,
 .pokemon-image-box,
 .battle-result-box {
   border: 0;
@@ -210,6 +251,74 @@ h1 {
   box-shadow:
     0 0 0 4px rgb(36 107 253 / 18%),
     0 12px 30px rgb(16 24 40 / 10%);
+}
+
+.pokemon-input:disabled {
+  cursor: not-allowed;
+  color: #98a2b3;
+  background:
+    linear-gradient(#f2f4f7, #f2f4f7) padding-box,
+    linear-gradient(135deg, rgb(152 162 179 / 28), rgb(208 213 221 / 48)) border-box;
+  box-shadow: none;
+}
+
+.pokemon-options {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  max-height: 196px;
+  padding: 6px;
+  overflow-y: auto;
+  border-radius: 16px;
+  background: rgb(248 250 252 / 88%);
+  box-shadow: inset 0 0 0 1px rgb(24 34 48 / 8%);
+}
+
+.pokemon-option {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  min-height: 56px;
+  padding: 6px 12px 6px 6px;
+  color: var(--ink);
+  background: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px rgb(24 34 48 / 8%);
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.pokemon-option:hover,
+.pokemon-option.selected {
+  background: #eff6ff;
+  box-shadow:
+    inset 0 0 0 2px rgb(36 107 253 / 46%),
+    0 8px 20px rgb(36 107 253 / 12%);
+}
+
+.pokemon-option:hover {
+  transform: translateY(-1px);
+}
+
+.pokemon-option img,
+.pokemon-option-placeholder {
+  display: block;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #eef6ff, #fff8dc);
+  object-fit: contain;
+}
+
+.pokemon-option strong {
+  overflow: hidden;
+  font-size: 0.95rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .action-button,
@@ -352,6 +461,15 @@ h1 {
   color: #c0102b;
   font-size: 0.9rem;
   font-weight: 700;
+  text-align: center;
+}
+
+.battle-error {
+  max-width: 100%;
+  margin: -16px 0 0;
+  color: #ffb4bf;
+  font-size: 0.92rem;
+  font-weight: 800;
   text-align: center;
 }
 
